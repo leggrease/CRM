@@ -1,9 +1,15 @@
+require "pry"
+
 class Rolodex
 attr_reader :contacts
 @@index = 1000
 
 	def initialize
 		@contacts = []
+	end
+
+	def find(id)
+		@found = @contacts.select{|contact| contact.id == id }.first
 	end
 
 	def add_contact(contact)
@@ -15,6 +21,27 @@ attr_reader :contacts
 	def delete_contact(id_delete)
 		@contacts.delete_if{|contact| contact.id == id_delete}
 	end
+
+	def modify_contact(change)
+		case change
+		when "first name"
+			puts "New first name: "
+			@found.first_name = gets.chomp
+		when "last name"
+			puts "New last name: "
+			@found.last_name = gets.chomp
+		when "email"
+			puts "New email: "
+			@found.email = gets.chomp
+		when "note"
+			puts "New notes: "
+			@found.note = gets.chomp
+		else
+			puts "Error use a specified command"
+		end
+	end
+
+		
 end
 
 # rolo1 = Rolodex.new

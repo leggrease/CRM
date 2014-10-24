@@ -68,11 +68,22 @@ class CRM
 	end
 
 	def delete_contact
-		puts "Type the contact id number you want to delete I.E: 1xxx."
+		puts "Type the contact id number you want to delete I.E: 1xxx: "
 		id_delete = gets.chomp.to_i
 		@rolodex.delete_contact(id_delete)
 		puts "Contact #{id_delete}was deleted"
 	end
+
+	def modify_contact
+		puts "Type the contact id number you want to modify I.E. 1xxx: "
+		id = gets.chomp.to_i
+		@rolodex.find(id)
+		puts "What do you want to change about the contact?"
+		puts "I.E.: first name, last name, email or note."
+		change = gets.chomp.downcase
+		@rolodex.modify_contact(change)
+	end
+
 end
 
 crm = CRM.new("Bitmaker labs CRM")
