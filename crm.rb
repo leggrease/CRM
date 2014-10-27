@@ -47,15 +47,25 @@ class CRM
 		end
 	end
 
+	def blank(input)
+		!(input.nil? || input.empty?)
+	end
+
+	def field_loop(string)
+		puts "#{string}: "
+		input = gets.chomp
+		until blank(input)
+				puts "please enter a #{string}."	
+				input = gets.chomp.strip
+		end
+		input
+	end
+
 	def add_contact
-		print "First name: "
-		first_name = gets.chomp
-		print "Last name: "
-		last_name = gets.chomp
-		print "Email: "
-		email = gets.chomp
-		print "Note: "
-		note = gets.chomp
+		first_name = field_loop("first name")
+		last_name = field_loop("last name")
+		email = field_loop("email")
+		note = field_loop("note")
 
 		contact = Contact.new(first_name, last_name, email, note)
 		@rolodex.add_contact(contact)
