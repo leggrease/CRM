@@ -71,18 +71,50 @@ class CRM
 		puts "Type the contact id number you want to delete I.E: 1xxx: "
 		id_delete = gets.chomp.to_i
 		@rolodex.delete_contact(id_delete)
-		puts "Contact #{id_delete}was deleted"
+		puts "Contact #{id_delete} was deleted"
 	end
 
 	def modify_contact
 		puts "Type the contact id number you want to modify I.E. 1xxx: "
 		id = gets.chomp.to_i
 		@rolodex.find(id)
-		puts "What do you want to change about the contact?"
-		puts "I.E.: first name, last name, email or note."
-		change = gets.chomp.downcase
-		@rolodex.modify_contact(change)
+		loop do
+			puts "What do you want to change about the contact?"
+			puts "I.E.: first name, last name, email or note."
+			@change = gets.chomp.downcase
+			puts "You have chosen to change the #{@change} are you sure you want to do this?(y/n)"
+			yes_or_no = gets.chomp.downcase
+			if yes_or_no == "y"
+				break
+			else 
+				return
+			end
+		end
+			@rolodex.modify_contact(@change)
+
 	end
+
+	def display_one_contact
+		puts "Type the contact id number you want to display I.E. 1xxx"
+		id = gets.chomp.to_i
+		@rolodex.contacts.each do |contact|
+			if contact.id == id
+				puts contact.first_name
+				puts contact.last_name
+				puts contact.email
+				puts contact.note
+			end
+		end
+	end
+	
+	def display_attribute
+	puts "Type the contact id number you want to access. I.E. 1xxx"
+	id = gets.chomp.to_i
+	@rolodex.find(id)
+	puts "pick the attribute you want to see (first name, last name, email or note)"
+		attribute = gets.chomp.downcase
+	@rolodex.display_attribute(attribute)
+	end	
 
 end
 

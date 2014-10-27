@@ -41,6 +41,21 @@ attr_reader :contacts
 		end
 	end
 
+	def display_attribute(attribute)
+		case attribute
+		when "first name"
+			puts @found.first_name
+		when "last name"
+			puts @found.last_name
+		when "email"
+			puts @found.email
+		when "note"
+			puts @found.note
+		else 
+			puts "Error use a specified command"
+		end
+	end
+
 		
 end
 
